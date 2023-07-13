@@ -23,8 +23,9 @@ namespace IkApp.Services.Services
 
         public void Add(T entity)
         {
-            _repository.Add(entity);
-            _unitOfWork.Commit();
+                _unitOfWork.GetRepository<T>().Add(entity);
+                _unitOfWork.Commit();
+
         }
 
         public IQueryable<T> GetAll()

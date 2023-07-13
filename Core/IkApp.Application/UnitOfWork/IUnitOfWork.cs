@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IkApp.Application.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IGenericRepository<T> GetRepository<T>() where T : class;
         void Commit();

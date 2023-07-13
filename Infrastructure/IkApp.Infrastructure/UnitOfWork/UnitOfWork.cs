@@ -36,5 +36,9 @@ namespace IkApp.Infrastructure.UnitOfWork
             }
         }
 
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
     }
 }
