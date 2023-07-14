@@ -10,14 +10,6 @@ namespace IkApp.Domain.Entities
 {
     public class AppUser : IdentityUser
     {
-        //public string Name { get; set; }
-        //public string SurName { get; set; }
-        //public string PersonalMail { get; set; }
-        //public string PersonalPhoneNumber { get; set; }
-        //public bool MaritalStatus { get; set; }
-        //public bool Gender { get; set; }
-        //public DateTime DateOfBirth { get; set; }
-        //public bool WorkingStatus { get; set; }
-        //public DateTime DateOfStart { get; set; }
+
     }
 }

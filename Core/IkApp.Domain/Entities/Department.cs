@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IkApp.Domain.Entities
 {
-    public class Address
+    public class Department
     {
 
     }
