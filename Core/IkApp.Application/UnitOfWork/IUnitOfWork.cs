@@ -9,7 +9,15 @@ namespace IkApp.Application.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<T> GetRepository<T>() where T : class;
+        IAddressRepository AddressRepository { get; }
+        IAnnouncementRepository AnnouncementRepository { get; }
+        IDepartmentRepository DepartmentRepository { get; }
+        IEmplooyeLoanedItemRepository EmplooyeLoanedItemRepository { get; }
+        IEmployeeChildRepository EmployeeChildRepository { get; }
+        IEmployeeDetailRepository EmployeeDetailRepository { get; }
+        IProductTypeRepository ProductTypeRepository { get; }
+        ISectionRepository SectionRepository { get; }
+        ITaskRepository TaskRepository { get; }
         void Commit();
     }
 }

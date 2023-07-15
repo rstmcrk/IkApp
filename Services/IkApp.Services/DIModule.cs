@@ -23,7 +23,7 @@ namespace IkApp.Services
                          options.UseSqlServer(Configuration.ConnectionString));
 
             services.AddIdentityCore<AppUser>().AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
