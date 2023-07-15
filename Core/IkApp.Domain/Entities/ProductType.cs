@@ -8,5 +8,9 @@ namespace IkApp.Domain.Entities
 {
     public class ProductType
     {
+        public int ProductTypeId { get; set; }
+        public string Name { get; set; }
+        public string EmplooyeLoanedItemId { get; set; }
+        public EmplooyeLoanedItem EmplooyeLoanedItem { get; set; }
     }
 }

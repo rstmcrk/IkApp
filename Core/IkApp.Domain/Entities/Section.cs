@@ -8,5 +8,9 @@ namespace IkApp.Domain.Entities
 {
     public class Section
     {
+        public int SectionId { get; set; }
+        public string SectionName { get; set; }
+        public string SectionUserId { get; set; }
+        public AppUser SectionUser { get; set; }
     }
 }
