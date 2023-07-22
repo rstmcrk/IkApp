@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230716142146_mig_7")]
+    partial class mig_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasIndex("AddressUserId")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Announcement", b =>
@@ -121,7 +124,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("EndDateOfWork")
+                    b.Property<DateTime>("EndDateOfWork")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -161,7 +164,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartDateOfWork")
+                    b.Property<DateTime>("StartDateOfWork")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("TeamLeaderId")
@@ -383,13 +386,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f854a25e-f61e-4f99-8f1a-1a127b9d9d22",
+                            Id = "421be73b-e0d8-4924-b3dc-f8e36b64394a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9c0c18d0-2a17-4ea3-8f4f-834ae5fc9d5a",
+                            Id = "79a2bc2c-abf5-4a13-991f-ce0c84ce4937",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -652,21 +655,26 @@ namespace IkApp.Infrastructure.Migrations
 
             modelBuilder.Entity("IkApp.Domain.Entities.AppUser", b =>
                 {
-                    b.Navigation("Address");
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Announcements");
 
-                    b.Navigation("Department");
+                    b.Navigation("Department")
+                        .IsRequired();
 
                     b.Navigation("EmplooyeLoanedItems");
 
                     b.Navigation("EmployeeChilds");
 
-                    b.Navigation("EmployeeDetail");
+                    b.Navigation("EmployeeDetail")
+                        .IsRequired();
 
-                    b.Navigation("Section");
+                    b.Navigation("Section")
+                        .IsRequired();
 
-                    b.Navigation("Task");
+                    b.Navigation("Task")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.EmplooyeLoanedItem", b =>

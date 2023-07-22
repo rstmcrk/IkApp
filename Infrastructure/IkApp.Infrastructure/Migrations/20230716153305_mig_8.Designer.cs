@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230716153305_mig_8")]
+    partial class mig_8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasIndex("AddressUserId")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Announcement", b =>
@@ -383,13 +386,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f854a25e-f61e-4f99-8f1a-1a127b9d9d22",
+                            Id = "97071a2c-10e5-4caa-a9d2-d4df8a7785f5",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9c0c18d0-2a17-4ea3-8f4f-834ae5fc9d5a",
+                            Id = "75807a41-9d5b-4056-a25f-37801efe19cb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

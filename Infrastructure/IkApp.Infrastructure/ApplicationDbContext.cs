@@ -1,7 +1,9 @@
 ﻿using IkApp.Domain.Entities;
+using IkApp.Infrastructure.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,85 +13,30 @@ using Task = IkApp.Domain.Entities.Task;
 
 namespace IkApp.Infrastructure
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser, UserRole, string, IdentityUserClaim<string>, IdentityUserRole<string>,
-                                        IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
-        {
-
+        {       
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<AppUser>(entity =>
-            {
-                entity.ToTable("Users");
-            });
-            builder.Entity<UserRole>(entity =>
-            {
-                entity.ToTable("UserRole");
-            });
-
-            builder.Entity<EmployeeChild>()
-                .HasOne(x => x.Parent)
-                .WithMany(y => y.EmployeeChilds)
-                .HasForeignKey(x => x.ParentUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<EmployeeDetail>()
-                .HasOne(x => x.EmployeeDetailUser)
-                .WithOne(y => y.EmployeeDetail)
-                .HasForeignKey<EmployeeDetail>(x => x.EmployeeId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<EmplooyeLoanedItem>()
-                .HasOne(x => x.User)
-                .WithMany(y => y.EmplooyeLoanedItems)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<ProductType>()
-                .HasOne(x => x.EmplooyeLoanedItem)
-                .WithMany(y => y.ProductTypes)
-                .HasForeignKey(x => x.EmplooyeLoanedItemId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Section>()
-                .HasOne(x => x.SectionUser)
-                .WithOne(y => y.Section)
-                .HasForeignKey<Section>(x => x.SectionUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Task>()
-                .HasOne(x => x.TaskUser)
-                .WithOne(y => y.Task)
-                .HasForeignKey<Task>(x => x.TaskUsrId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Address>()
-                .HasOne(x => x.AddressUser)
-                .WithOne(y => y.Address)
-                .HasForeignKey<Address>(x => x.AddressUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Department>()
-                .HasOne(x => x.DepartmentUser)
-                .WithOne(y => y.Department)
-                .HasForeignKey<Department>(x => x.DepartmentUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Announcement>()
-                .HasOne(x => x.AnnouncementUser)
-                .WithMany(y => y.Announcements)
-                .HasForeignKey(x => x.AnnouncementUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new EmployeeChildConfiguration());
+            builder.ApplyConfiguration(new EmployeeDetailConfiguration());
+            builder.ApplyConfiguration(new EmplooyeLoanedItemConfiguration());
+            builder.ApplyConfiguration(new ProductTypeConfiguration());
+            builder.ApplyConfiguration(new SectionConfiguration());
+            builder.ApplyConfiguration(new TaskConfiguration());
+            builder.ApplyConfiguration(new AddressConfiguration());
+            builder.ApplyConfiguration(new AnnouncementConfiguration());
+            builder.ApplyConfiguration(new AppUserConfiguration());
         }
 
-        public DbSet<Address> addresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<EmplooyeLoanedItem> EmplooyeLoanedItems { get; set; }
@@ -98,6 +45,5 @@ namespace IkApp.Infrastructure
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Task> Tasks { get; set; }
-
     }
 }

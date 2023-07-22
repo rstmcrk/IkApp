@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717053616_mig_9")]
+    partial class mig_9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasIndex("AddressUserId")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Announcement", b =>
@@ -157,6 +160,12 @@ namespace IkApp.Infrastructure.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -383,13 +392,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f854a25e-f61e-4f99-8f1a-1a127b9d9d22",
+                            Id = "29b77f93-6e95-4a47-86be-073f93b57a92",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9c0c18d0-2a17-4ea3-8f4f-834ae5fc9d5a",
+                            Id = "68151539-6e9e-43b2-bbc9-7fea0b709869",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230716135914_mig_5")]
+    partial class mig_5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasIndex("AddressUserId")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Announcement", b =>
@@ -121,7 +124,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("EndDateOfWork")
+                    b.Property<DateTime>("EndDateOfWork")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -161,7 +164,7 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartDateOfWork")
+                    b.Property<DateTime>("StartDateOfWork")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("TeamLeaderId")
@@ -380,19 +383,7 @@ namespace IkApp.Infrastructure.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "f854a25e-f61e-4f99-8f1a-1a127b9d9d22",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "9c0c18d0-2a17-4ea3-8f4f-834ae5fc9d5a",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -499,6 +490,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("IkApp.Domain.Entities.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Address", b =>
@@ -650,23 +648,37 @@ namespace IkApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("IkApp.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithOne()
+                        .HasForeignKey("IkApp.Domain.Entities.UserRole", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("IkApp.Domain.Entities.AppUser", b =>
                 {
-                    b.Navigation("Address");
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Announcements");
 
-                    b.Navigation("Department");
+                    b.Navigation("Department")
+                        .IsRequired();
 
                     b.Navigation("EmplooyeLoanedItems");
 
                     b.Navigation("EmployeeChilds");
 
-                    b.Navigation("EmployeeDetail");
+                    b.Navigation("EmployeeDetail")
+                        .IsRequired();
 
-                    b.Navigation("Section");
+                    b.Navigation("Section")
+                        .IsRequired();
 
-                    b.Navigation("Task");
+                    b.Navigation("Task")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.EmplooyeLoanedItem", b =>

@@ -10,7 +10,7 @@ namespace IkApp.Domain.Entities
     {
         public int ProductTypeId { get; set; }
         public string Name { get; set; }
-        public int EmplooyeLoanedItemId { get; set; }
-        public EmplooyeLoanedItem EmplooyeLoanedItem { get; set; }
+        public int? EmplooyeLoanedItemId { get; set; }
+        public EmplooyeLoanedItem? EmplooyeLoanedItem { get; set; }
     }
 }
