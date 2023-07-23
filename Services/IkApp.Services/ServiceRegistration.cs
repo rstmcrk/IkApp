@@ -22,10 +22,11 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using IkApp.Application.ErrorModel;
 using IkApp.Infrastructure.Config;
+using IkApp.Cache;
 
 namespace IkApp.Services
 {
-    public static class DIModule
+    public static class ServiceRegistration
     {
         public static void AddIdentityOptions(this IServiceCollection services)
         {
@@ -52,6 +53,8 @@ namespace IkApp.Services
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddTransient<IAppUserService, AppUserService>();
+
+            services.AddScoped<ICacheManager, RedisCacheManager>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, 

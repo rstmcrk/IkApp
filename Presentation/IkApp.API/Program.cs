@@ -29,15 +29,6 @@ builder.Services.AddIdentityOptions();
 builder.Services.Lifetime();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
-builder.Services.AddSingleton<RedisService>(sp =>
-{
-    return new RedisService(builder.Configuration["CacheOptions:Url"]);
-});
-builder.Services.AddSingleton<IDatabase>(sp =>
-{
-    var redisService = sp.GetRequiredService<RedisService>();
-    return redisService.GetDb(0);
-});
 
 
 
