@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IkApp.Application.DTOs;
 using IkApp.Application.Services;
+using IkApp.Cache;
 using IkApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,20 @@ namespace IkApp.Services.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
-        public AppUserService(UserManager<AppUser> userManager, IMapper mapper)
+        private readonly ICacheManager _cacheManager;
+
+        public AppUserService(UserManager<AppUser> userManager, IMapper mapper, ICacheManager cacheManager)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _cacheManager = cacheManager;
         }
 
         public void Add(AppUser entity)
         {
-            throw new NotImplementedException();
+            // adding user
+
+            _cacheManager.Remove("users");
         }
 
         public IQueryable<AppUser> GetAll()
@@ -40,7 +46,10 @@ namespace IkApp.Services.Services
 
         public async Task<List<AppUserDTO>> GetUsers()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _cacheManager.GetAsync("users", async() =>
+            {
+                return await _userManager.Users.ToListAsync();
+            }, new TimeSpan(0, 10, 0));
 
             var userDTOs = _mapper.Map<List<AppUserDTO>>(users);
 

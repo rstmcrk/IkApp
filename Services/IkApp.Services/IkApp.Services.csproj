@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\IkApp.Application\IkApp.Application.csproj" />
     <ProjectReference Include="..\..\Core\IkApp.Domain\IkApp.Domain.csproj" />
+    <ProjectReference Include="..\..\IkApp.Cache\IkApp.Cache.csproj" />
     <ProjectReference Include="..\..\Infrastructure\IkApp.Infrastructure\IkApp.Infrastructure.csproj" />
   </ItemGroup>
 

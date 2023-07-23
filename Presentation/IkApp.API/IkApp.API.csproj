@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\IkApp.Caching\IkApp.Caching.csproj" />
     <ProjectReference Include="..\..\Services\IkApp.Services\IkApp.Services.csproj" />
   </ItemGroup>
 
