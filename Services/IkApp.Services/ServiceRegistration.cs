@@ -53,7 +53,6 @@ namespace IkApp.Services
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddTransient<IAppUserService, AppUserService>();
-
             services.AddScoped<ICacheManager, RedisCacheManager>();
         }
 
