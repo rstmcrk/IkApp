@@ -25,25 +25,21 @@ namespace IkApp.Infrastructure
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new EmployeeChildConfiguration());
-            builder.ApplyConfiguration(new EmployeeDetailConfiguration());
-            builder.ApplyConfiguration(new EmplooyeLoanedItemConfiguration());
-            builder.ApplyConfiguration(new ProductTypeConfiguration());
-            builder.ApplyConfiguration(new SectionConfiguration());
             builder.ApplyConfiguration(new TaskConfiguration());
             builder.ApplyConfiguration(new AddressConfiguration());
-            builder.ApplyConfiguration(new AnnouncementConfiguration());
             builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new DepartmentConfiguration());
+            builder.ApplyConfiguration(new JobConfiguration());
+            builder.ApplyConfiguration(new DayOffConfiguration());
+            builder.ApplyConfiguration(new DayOffRequestConfiguration());
+
         }
 
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<EmplooyeLoanedItem> EmplooyeLoanedItems { get; set; }
-        public DbSet<EmployeeChild> EmployeeChildren { get; set; }
-        public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<Section> Sections { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<DayOff> DaysOff { get; set; }
+        public DbSet<DayOffRequest> DayOffRequests { get; set; }
     }
 }

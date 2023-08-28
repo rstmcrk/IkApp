@@ -17,7 +17,7 @@ namespace IkApp.Infrastructure.Config
             builder
                .HasOne(x => x.TaskUser)
                .WithOne(y => y.Task)
-               .HasForeignKey<Task>(x => x.TaskUsrId)
+               .HasForeignKey<Task>(x => x.TaskUserId)
                .OnDelete(DeleteBehavior.Cascade);
         }
     }

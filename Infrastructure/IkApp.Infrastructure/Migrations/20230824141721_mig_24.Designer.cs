@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230824141721_mig_24")]
+    partial class mig_24
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +102,7 @@ namespace IkApp.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("ManagerId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -132,6 +135,10 @@ namespace IkApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ManagerId")
+                        .IsUnique()
+                        .HasFilter("[ManagerId] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -327,13 +334,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2d82ade3-6bbd-4527-91c3-5a310526612b",
+                            Id = "b20ad2ea-4a8c-4e3b-8bc5-db7e0a2617f3",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1431c2f0-f027-4685-b767-5ca64481e450",
+                            Id = "add90408-0d0e-4fec-b37e-ecf7ab355130",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -454,6 +461,16 @@ namespace IkApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("AddressUser");
+                });
+
+            modelBuilder.Entity("IkApp.Domain.Entities.AppUser", b =>
+                {
+                    b.HasOne("IkApp.Domain.Entities.AppUser", "Manager")
+                        .WithOne()
+                        .HasForeignKey("IkApp.Domain.Entities.AppUser", "ManagerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.DayOff", b =>

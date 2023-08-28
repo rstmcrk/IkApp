@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Http;
 using IkApp.Application.ErrorModel;
 using IkApp.Infrastructure.Config;
 using IkApp.Cache;
+using IkApp.Services.Interfaces;
 
 namespace IkApp.Services
 {
@@ -49,11 +50,11 @@ namespace IkApp.Services
         public static void Lifetime(this IServiceCollection services)
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IProductTypeService, ProductTypeService>();
-            services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<ILoggerService, LoggerService>();
-            services.AddTransient<IAppUserService, AppUserService>();
             services.AddScoped<ICacheManager, RedisCacheManager>();
+            services.AddTransient<IAppUserService, AppUserService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IJobService, JobService>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, 

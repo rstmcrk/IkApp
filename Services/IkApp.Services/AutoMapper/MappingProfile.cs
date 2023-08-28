@@ -2,6 +2,7 @@
 using IkApp.Application.DTOs;
 using IkApp.Application.RequestModels;
 using IkApp.Domain.Entities;
+using Task = IkApp.Domain.Entities.Task;
 
 namespace IkApp.Services.AutoMapper
 {
@@ -10,7 +11,16 @@ namespace IkApp.Services.AutoMapper
         public MappingProfile()
         {
             CreateMap<AppUserForRegisterModel, AppUser>();
-            CreateMap<AppUser, AppUserDTO>();
+            CreateMap<DepartmentForAdd, Department>();
+            CreateMap<TaskForAdd, Task>();
+            CreateMap<AppUser, AppUserDTO>().ReverseMap();
+            CreateMap<AddressForAdd, Address>();
+            CreateMap<Address, AddressDTO>().ReverseMap();
+            CreateMap<Department, DepartmentDTO>().ReverseMap();
+            CreateMap<Task, TaskDTO>().ReverseMap();
+            CreateMap<Job, JobDTO>().ReverseMap();
+            CreateMap<Job, JobForAdd>().ReverseMap();
+            CreateMap<DayOff, DayOffDTO>().ReverseMap();
         }
     }
 }
