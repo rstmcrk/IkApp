@@ -926,3 +926,9 @@
 2023-08-25 14:25:07.5878 Info Message Template Auto Format enabled
 2023-08-25 14:25:07.7214 Info Registered target NLog.Targets.FileTarget(Name=logfile)
 2023-08-25 14:25:07.7513 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\ruste\source\repos\IkApp\Presentation\IkApp.API\bin\Debug\net7.0\nlog.config
+2023-08-30 18:57:55.0547 Info Message Template Auto Format enabled
+2023-08-30 18:57:55.3096 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-08-30 18:57:55.3632 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\ruste\source\repos\IkApp\Presentation\IkApp.API\bin\Debug\net7.0\nlog.config
+2023-08-30 19:11:32.1191 Info Message Template Auto Format enabled
+2023-08-30 19:11:32.3462 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-08-30 19:11:32.4043 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\ruste\source\repos\IkApp\Presentation\IkApp.API\bin\Debug\net7.0\nlog.config

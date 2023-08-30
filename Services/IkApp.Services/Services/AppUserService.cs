@@ -4,6 +4,7 @@ using IkApp.Application.RequestModels;
 using IkApp.Application.Services;
 using IkApp.Cache;
 using IkApp.Domain.Entities;
+using IkApp.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,15 +29,17 @@ namespace IkApp.Services.Services
         private readonly ICacheManager _cacheManager;
         private readonly IConfiguration _config;
         private readonly ILoggerService _logger;
+        private readonly IDayOffService _dayOffService;
         private AppUser _user;
 
-        public AppUserService(UserManager<AppUser> userManager, IMapper mapper, ICacheManager cacheManager, IConfiguration config, ILoggerService logger)
+        public AppUserService(UserManager<AppUser> userManager, IMapper mapper, ICacheManager cacheManager, IConfiguration config, ILoggerService logger, IDayOffService dayOffService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _cacheManager = cacheManager;
             _config = config;
             _logger = logger;
+            _dayOffService = dayOffService;
         }
 
         public void Add(AppUser entity)
@@ -95,7 +98,6 @@ namespace IkApp.Services.Services
         public async Task<IdentityResult> RegisterUser(AppUserForRegisterModel userModel, string roleName)
         {
             _cacheManager.Remove("users");
-            _mapper.Map<DayOff>(userModel.DayOff);
             _mapper.Map<Address>(userModel.Address);
             _mapper.Map<Department>(userModel.Department);
             _mapper.Map<Task>(userModel.Task);
@@ -105,6 +107,15 @@ namespace IkApp.Services.Services
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, roleName);
+                var dayOff = new DayOff
+                {
+                    RemainingDayOff = 0,
+                    DayOffAssignmentDate = DateTime.Now.AddYears(1),
+                    DayOffAssign = 14,
+                    UserId = user.Id,
+                    User = user
+                };
+                _dayOffService.Add(dayOff);
             }
 
             return result;

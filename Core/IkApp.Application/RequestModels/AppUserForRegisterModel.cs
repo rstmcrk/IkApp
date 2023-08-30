@@ -14,7 +14,6 @@ namespace IkApp.Application.RequestModels
         public virtual AddressForAdd? Address { get; set; }
         public virtual DepartmentForAdd? Department { get; set; }
         public virtual TaskForAdd? Task { get; set; }
-        public virtual DayOffDTO? DayOff { get; set; }
         public string? Password { get; init; }
         public string? ManagerId { get; set; }
     }
