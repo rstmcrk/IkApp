@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IkApp.Domain.Entities
+namespace IkApp.Application.DTOs
 {
-    public class Task
+    public class TaskDTO
     {
         public int TaskId { get; set; }
         public string TaskName { get; set; }
-        public string TaskUserId { get; set; }
-        public AppUser TaskUser { get; set; }
     }
 }

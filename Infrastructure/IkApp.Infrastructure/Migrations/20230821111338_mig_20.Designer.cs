@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821111338_mig_20")]
+    partial class mig_20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,6 +73,9 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BoddyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -98,8 +104,8 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("ManagerId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ManagerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -124,6 +130,9 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<DateTime?>("StartDateOfWork")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("TeamLeaderId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -142,71 +151,6 @@ namespace IkApp.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("IkApp.Domain.Entities.DayOff", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<float>("DayOffAssign")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("DayOffAssignmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("RemainingDayOff")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("DaysOff");
-                });
-
-            modelBuilder.Entity("IkApp.Domain.Entities.DayOffRequest", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<float>("DayOffNumber")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PermissionDetail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PermissionEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("PermissionStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PermissionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("DayOffRequests");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Department", b =>
@@ -231,47 +175,6 @@ namespace IkApp.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("IkApp.Domain.Entities.Job", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("JobDetail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Precedence")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobUserId");
-
-                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Task", b =>
@@ -327,13 +230,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2d82ade3-6bbd-4527-91c3-5a310526612b",
+                            Id = "392003c6-1798-4ab3-84ea-971f55d7da23",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1431c2f0-f027-4685-b767-5ca64481e450",
+                            Id = "f89b9432-8048-43b8-a275-5c67d98a10e4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -456,28 +359,6 @@ namespace IkApp.Infrastructure.Migrations
                     b.Navigation("AddressUser");
                 });
 
-            modelBuilder.Entity("IkApp.Domain.Entities.DayOff", b =>
-                {
-                    b.HasOne("IkApp.Domain.Entities.AppUser", "User")
-                        .WithOne("DayOff")
-                        .HasForeignKey("IkApp.Domain.Entities.DayOff", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("IkApp.Domain.Entities.DayOffRequest", b =>
-                {
-                    b.HasOne("IkApp.Domain.Entities.AppUser", "User")
-                        .WithMany("DayOffRequests")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("IkApp.Domain.Entities.Department", b =>
                 {
                     b.HasOne("IkApp.Domain.Entities.AppUser", "DepartmentUser")
@@ -487,17 +368,6 @@ namespace IkApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("DepartmentUser");
-                });
-
-            modelBuilder.Entity("IkApp.Domain.Entities.Job", b =>
-                {
-                    b.HasOne("IkApp.Domain.Entities.AppUser", "JobUser")
-                        .WithMany("Jobs")
-                        .HasForeignKey("JobUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("JobUser");
                 });
 
             modelBuilder.Entity("IkApp.Domain.Entities.Task", b =>
@@ -566,13 +436,7 @@ namespace IkApp.Infrastructure.Migrations
                 {
                     b.Navigation("Address");
 
-                    b.Navigation("DayOff");
-
-                    b.Navigation("DayOffRequests");
-
                     b.Navigation("Department");
-
-                    b.Navigation("Jobs");
 
                     b.Navigation("Task");
                 });
