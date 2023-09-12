@@ -56,6 +56,8 @@ namespace IkApp.Services
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IJobService, JobService>();
             services.AddTransient<IDayOffService, DayOffService>();
+            services.AddTransient<IDayOffRequestService, DayOffRequestService>();
+            services.AddTransient<INotificationService, NotificationService>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, 

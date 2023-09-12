@@ -40,9 +40,9 @@ namespace IkApp.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<DayOff> GetByIdAsync(int id)
+        public async Task<DayOff> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.GetRepository<DayOff>().GetByIdAsync(id);
         }
 
         public async Task<DayOffDTO> GetByUserIdAsync(string id)
@@ -51,7 +51,7 @@ namespace IkApp.Services.Services
             var dayOff = _userManager.Users
                 .Include(u => u.DayOff)
                 .FirstOrDefault(u => u.Id == user.Id);
-            var dayOffDto = _mapper.Map<DayOffDTO>(dayOff);
+            var dayOffDto = _mapper.Map<DayOffDTO>(dayOff.DayOff);
             return dayOffDto;
         }
 
@@ -62,7 +62,8 @@ namespace IkApp.Services.Services
 
         public void Update(DayOff entity)
         {
-            throw new NotImplementedException();
+            _unitOfWork.GetRepository<DayOff>().Update(entity);
+            _unitOfWork.Commit();
         }
 
         public IQueryable<DayOff> Where(Expression<Func<DayOff, bool>> expression)

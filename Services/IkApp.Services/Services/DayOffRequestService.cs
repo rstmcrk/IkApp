@@ -32,7 +32,7 @@ namespace IkApp.Services.Services
 
         public Task<DayOffRequest> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.GetRepository<DayOffRequest>().GetByIdAsync(id);
         }
 
         public void Remove(DayOffRequest entity)
@@ -42,7 +42,8 @@ namespace IkApp.Services.Services
 
         public void Update(DayOffRequest entity)
         {
-            throw new NotImplementedException();
+             _unitOfWork.GetRepository<DayOffRequest>().Update(entity);
+            _unitOfWork.Commit();
         }
 
         public IQueryable<DayOffRequest> Where(Expression<Func<DayOffRequest, bool>> expression)

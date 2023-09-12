@@ -196,6 +196,8 @@ namespace IkApp.Services.Services
                 .Include(u => u.Address)
                 .Include(u => u.Department)
                 .Include(u => u.Task)
+                .Include(u => u.Notifications)
+                .Include(u => u.DayOff)
                 .FirstOrDefault(u => u.Id == user.Id);
             var userDto = _mapper.Map<AppUserDTO>(userInclude);
             return userDto;

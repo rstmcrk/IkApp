@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IkApp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace IkApp.Application.DTOs
 {
     public class DayOffRequestDTO
     {
+        public int ID { get; set; }
         public string? PermissionType { get; set; }
         public string? PermissionDetail { get; set; }
         public float? DayOffNumber { get; set; }
         public DateTime? PermissionStart { get; set; }
         public DateTime? PermissionEnd { get; set; }
         public bool? Approval { get; set; }
+        public bool Status { get; set; }
         public string? UserId { get; set; }
+        public AppUserDTO? User { get; set; }
     }
 }

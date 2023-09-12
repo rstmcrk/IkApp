@@ -8,6 +8,7 @@ namespace IkApp.Application.DTOs
 {
     public class DayOffDTO
     {
+        public int ID { get; set; }
         public float? RemainingDayOff { get; set; }
         public DateTime? DayOffAssignmentDate { get; set; }
         public float? DayOffAssign { get; set; }

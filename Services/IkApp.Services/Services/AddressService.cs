@@ -54,7 +54,8 @@ namespace IkApp.Services.Services
 
         public void Update(Address entity)
         {
-            throw new NotImplementedException();
+            _unitOfWork.GetRepository<Address>().Update(entity);
+            _unitOfWork.Commit();
         }
 
         public IQueryable<Address> Where(Expression<Func<Address, bool>> expression)

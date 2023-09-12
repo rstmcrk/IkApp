@@ -34,11 +34,20 @@ namespace IkApp.API.Controllers
         }
 
         [Authorize(Roles = "Admin, User")]
+        [HttpDelete]
+        public async Task<IActionResult> DeletJob(int id)
+        {
+            var job = await _jobService.GetByIdAsync(id);
+            _jobService.Remove(job);
+            return Ok(200);
+        }
+
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("getJob")]
         public IActionResult GetJob()
         {
             var userId = HttpContext.Request.Query["userId"].ToString();
-            var jobs = _jobService.Where(x => x.JobUserId == userId);
+            var jobs = _jobService.Where(x => x.JobUserId == userId && x.Status != "Tamamlandı");
             var jobsDto = _mapper.Map<List<JobDTO>>(jobs);
             return Ok(jobsDto);
         }
@@ -52,7 +61,20 @@ namespace IkApp.API.Controllers
             var jobdataDto = _mapper.Map<Job>(jobdata);
             jobdataDto.JobUserId = user.Id;
             _jobService.Add(jobdataDto);
-            return Ok();
+            return Ok(201);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("updateJob")]
+        public async Task<IActionResult> updateJob(JobDTO jobdata)
+        {
+            var user = await _appUserService.GetUserForUserName(jobdata.JobUser.UserName);
+            jobdata.JobUser = user;
+            var jobdataDto = _mapper.Map<Job>(jobdata);
+            jobdataDto.JobUser = null;
+            jobdataDto.JobUserId = user.Id;
+            _jobService.Update(jobdataDto);
+            return Ok(200);
         }
 
         [Authorize(Roles = "Admin, User")]
@@ -62,7 +84,7 @@ namespace IkApp.API.Controllers
             var job = _jobService.Where(x => x.Id == jobdata.Id).FirstOrDefault();
             job.Status = jobdata.Status;
             _jobService.Update(job);
-            return Ok();
+            return Ok(200);
         }
     }
 }

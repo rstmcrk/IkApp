@@ -14,6 +14,7 @@ namespace IkApp.Application.RequestModels
         public DateTime? PermissionStart { get; set; }
         public DateTime? PermissionEnd { get; set; }
         public bool? Approval { get; set; }
+        public bool? Status { get; set; }
         public string? UserId { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace IkApp.Application.DTOs
         public virtual AddressDTO? Address { get; set; }
         public virtual DepartmentDTO? Department { get; set; }
         public virtual TaskDTO? Task { get; set; }
+        public virtual DayOffDTO? DayOff { get; set; }
+        public virtual ICollection<NotificationDTO>? Notifications { get; set; }
         public string? ManagerId { get; set; }
 
     }

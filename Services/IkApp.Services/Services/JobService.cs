@@ -32,7 +32,8 @@ namespace IkApp.Services.Services
 
         public IQueryable<Job> GetAll()
         {
-            return _unitOfWork.GetRepository<Job>().GetAll().Include(job => job.JobUser).Include(job => job.JobUser.Department);
+            return _unitOfWork.GetRepository<Job>().GetAll().Include(job => job.JobUser).Include(job => job.JobUser.Department)
+                .Where(job => job.Status != "Tamamlandı");
         }
 
         public Task<Job> GetByIdAsync(int id)
@@ -42,7 +43,8 @@ namespace IkApp.Services.Services
 
         public void Remove(Job entity)
         {
-            throw new NotImplementedException();
+            _unitOfWork.GetRepository<Job>().Remove(entity);
+            _unitOfWork.Commit();
         }
 
         public void Update(Job entity)
