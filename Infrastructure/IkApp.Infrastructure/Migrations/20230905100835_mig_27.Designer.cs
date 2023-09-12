@@ -4,6 +4,7 @@ using IkApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IkApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230905100835_mig_27")]
+    partial class mig_27
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,9 +184,6 @@ namespace IkApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<bool>("Approval")
-                        .HasColumnType("bit");
-
                     b.Property<float>("DayOffNumber")
                         .HasColumnType("real");
 
@@ -200,9 +200,6 @@ namespace IkApp.Infrastructure.Migrations
                     b.Property<string>("PermissionType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -363,13 +360,13 @@ namespace IkApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cf9d5637-eac9-46d2-a129-4f811b6322bf",
+                            Id = "4f4d25ed-fc91-4cbd-8652-2e458a613903",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "dd27326a-bc9c-4cd5-ae30-45e593e3b339",
+                            Id = "1c81a2a3-1cd9-476a-8df7-80a96fb65f10",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

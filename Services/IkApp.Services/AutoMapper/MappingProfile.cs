@@ -21,6 +21,9 @@ namespace IkApp.Services.AutoMapper
             CreateMap<Job, JobDTO>().ReverseMap();
             CreateMap<Job, JobForAdd>().ReverseMap();
             CreateMap<DayOff, DayOffDTO>().ReverseMap();
+            CreateMap<DayOffRequest, DayOffRequestDTO>().ReverseMap();
+            CreateMap<DayOffRequest, RequestForDayOff>().ReverseMap();
+            CreateMap<Notification, NotificationDTO>().ReverseMap();
         }
     }
 }

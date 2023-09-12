@@ -20,6 +20,7 @@ namespace IkApp.Domain.Entities
         public virtual ICollection<Job>? Jobs { get; set; }
         public virtual DayOff? DayOff { get; set; }
         public virtual ICollection<DayOffRequest>? DayOffRequests { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
         public string? ManagerId { get; set; }
     }
 }

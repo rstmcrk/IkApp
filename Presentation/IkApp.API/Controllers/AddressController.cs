@@ -39,7 +39,7 @@ namespace IkApp.API.Controllers
                 var address = _mapper.Map<Address>(addressForAdd);
                 _addressService.Add(address);    
             }
-            return StatusCode(201);
+            return Ok(201);
         }
 
         [Authorize(Roles = "Admin, User")]
@@ -52,6 +52,22 @@ namespace IkApp.API.Controllers
                 _addressService.Remove(address);
             }
             return Ok();
+        }
+
+        [Authorize(Roles = "Admin, User")]
+        [HttpPut]
+        public async Task<IActionResult> updateAddress(AddressDTO updateAddress)
+        {
+            if (updateAddress == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var address = _mapper.Map<Address>(updateAddress);
+                _addressService.Update(address);
+            }
+            return Ok(200);
         }
     }
 }

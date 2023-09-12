@@ -14,6 +14,8 @@ namespace IkApp.Domain.Entities
         public float DayOffNumber { get; set; }
         public DateTime PermissionStart { get; set; }
         public DateTime PermissionEnd { get; set; }
+        public bool Approval { get; set; }
+        public bool Status { get; set; }
         public string UserId { get; set; }
         public AppUser User { get; set; }
 

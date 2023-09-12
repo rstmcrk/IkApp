@@ -14,5 +14,6 @@ namespace IkApp.Application.DTOs
         public string District { get; set; }
         public string OpenAddress { get; set; }
         public string PostCode { get; set; }
+        public string AddressUserId { get; set; }
     }
 }
