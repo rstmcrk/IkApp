@@ -31,6 +31,7 @@ namespace IkApp.API.UserControllers
             {
                 var result = await _appUserService.RegisterUser(userModel,roleName);
             }
+
             return StatusCode(201);
         }
 
@@ -38,8 +39,10 @@ namespace IkApp.API.UserControllers
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate(AppUserForLoginModel loginUser)
         {
+
             if (!await _appUserService.ValidateUser(loginUser))
                 return Unauthorized();
+
             return Ok(new
             {
                 Token = await _appUserService.CreateToken()

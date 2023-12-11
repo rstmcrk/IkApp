@@ -34,12 +34,15 @@ namespace IkApp.API.Controllers
         public async Task<IActionResult> UpdateNotification(int id)
         {
             var notification = await _notificationService.GetByIdAsync(id);
+
             if (notification == null)
             {
                 return NotFound(); 
             }
+
             notification.Status = true;
             _notificationService.Update(notification);
+
             return Ok();
         }
     }
