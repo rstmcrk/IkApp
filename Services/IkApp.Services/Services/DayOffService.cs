@@ -46,11 +46,11 @@ namespace IkApp.Services.Services
         }
 
         public async Task<DayOffDTO> GetByUserIdAsync(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
+        {       
             var dayOff = _userManager.Users
                 .Include(u => u.DayOff)
-                .FirstOrDefault(u => u.Id == user.Id);
+                .FirstOrDefault(u => u.Id == id);
+
             var dayOffDto = _mapper.Map<DayOffDTO>(dayOff.DayOff);
             return dayOffDto;
         }

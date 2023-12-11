@@ -26,10 +26,17 @@ namespace IkApp.Services.Services
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Added Address.
+        /// </summary>
+        /// <param name="entity">address entity</param>
         public void Add(Address entity)
         {
             var id = entity.AddressUserId;
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
+
+            // TODO : User cachelenecek.
+
             entity.AddressUser = user;
             _unitOfWork.GetRepository<Address>().Add(entity);
             _unitOfWork.Commit();

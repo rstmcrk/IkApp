@@ -11,6 +11,9 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.Identity;
 using IkApp.Domain.Entities;
 using IkApp.Services.Services;
+using FluentValidation.AspNetCore;
+using IkApp.Application.Validators.FluentValidation.User;
+using IkApp.Infrastructure.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +22,8 @@ LogManager.LoadConfiguration(filepath);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<LoginUserValidator>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
